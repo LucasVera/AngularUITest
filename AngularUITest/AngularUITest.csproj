@@ -85,6 +85,7 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="App\controllers\calendarCtrl.js" />
+    <Content Include="App\controllers\gridCtrl.js" />
     <Content Include="App\controllers\mainCtrl.js" />
     <Content Include="App\customScripts.js" />
     <Content Include="App\services\helperService.js" />
@@ -95,6 +96,9 @@
     <Content Include="Content\bootstrap.yeti.css" />
     <Content Include="Content\bootstrap.yeti.min.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\ui-grid.css" />
+    <Content Include="Content\ui-grid.min.css" />
+    <Content Include="Content\ui-grid.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
@@ -113,6 +117,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\ui-grid.woff" />
+    <Content Include="Content\ui-grid.ttf" />
+    <Content Include="Content\ui-grid.eot" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -653,7 +660,10 @@
     <Content Include="Scripts\node_modules\moment\src\locale\zh-hk.js" />
     <Content Include="Scripts\node_modules\moment\src\locale\zh-tw.js" />
     <Content Include="Scripts\node_modules\moment\src\moment.js" />
+    <Content Include="Scripts\ui-grid.js" />
+    <Content Include="Scripts\ui-grid.min.js" />
     <Content Include="views\calendar.html" />
+    <Content Include="views\grid.html" />
     <Content Include="views\main.html" />
     <Content Include="Web.config" />
     <Content Include="Scripts\node_modules\angular-ui-calendar\.bowerrc" />

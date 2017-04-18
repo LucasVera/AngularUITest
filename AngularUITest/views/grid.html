@@ -1,0 +1,66 @@
+﻿<div class="container">
+    <div class="row row-content">
+        <div class="col-xs-12">
+            <h2>Ejemplo de grid (tabla)</h2>
+            <div class="marg-md"></div>
+
+            <div ui-i18n="{{'es'}}">
+                <div class="ui-grid grid" id="grid1" ui-grid="gridOpts"></div>
+            </div>
+            <div class="marg-md"></div>
+
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addRecordModal">Agregar registro</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODALS -->
+<div id="addRecordModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">Agregar registro</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal pad-sm" id="addRecordForm" name="addRecordForm" ng-submit="addRecord(newRecord)">
+                    <div class="form-group">
+                        <label class="form-label" for="txtNames">Nombres</label>
+                        <input type="text" class="form-control" id="txtNames" placeholder="Ingrese su(s) nombre(s) aquí" ng-model="newRecord.names" maxlength="100" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="txtLastNames">Apellidos</label>
+                        <input type="text" class="form-control" id="txtLastNanes" placeholder="Ingrese sus apellídos aquí" ng-model="newRecord.lastNames" maxlength="100" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="txtCompany">Compañia</label>
+                        <input type="text" class="form-control" id="txtCompany" placeholder="Ingrese la compañía" ng-model="newRecord.company" maxlength="50" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="txtAge">Edad</label>
+                        <input type="number" min="0" class="form-control" id="txtAge" placeholder="Ingrese la edad" ng-model="newRecord.age" required />
+                    </div>
+                    <div class="form-group">
+                        <h5 class="col-xs-4 form-label" for="chkIsAdmin">Es administrador</h5>
+                        <div class="col-xs-2">
+                            <input class="checkbox checkbox-inline" style="margin-top:4px;" type="checkbox" id="chkIsAdmin" ng-model="newRecord.isAdmin" />
+                        </div>
+                    </div>
+
+                    <div class="pad-sm"></div>
+
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    <button type="reset" class="btn btn-default">Limpiar</button>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+

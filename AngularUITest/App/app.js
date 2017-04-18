@@ -3,7 +3,8 @@
 var ngModule = angular.module('AngularUI', [
     'ngResource',
     'ngRoute',
-    'ui.calendar'
+    'ui.calendar',
+    'ui.grid'
 ]);
 
 
@@ -18,6 +19,11 @@ ngModule.config(function ($routeProvider) {
             templateUrl: 'views/calendar.html',
             controller: 'CalendarCtrl',
             controllerAs: 'calendar'
+        })
+        .when('/grid', {
+            templateUrl: 'views/grid.html',
+            controller: 'GridCtrl',
+            controllerAs: 'grid'
         })
         .otherwise({
             redirectTo: '/'

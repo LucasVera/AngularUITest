@@ -23,8 +23,35 @@ angular.module('AngularUI')
                 eventRender: $scope.eventRender,
 
                 timeFormat: 'hh:mm a'
+                /*
+                views: {
+                    basic: { timeFormat: 'hh:mm a' },
+                    agenda: { timeFormat: 'hh:mm a' },
+                    week: { timeFormat: 'hh:mm a' },
+                    day: { timeFormat: 'hh:mm a' }
+                }
+                */
             }
         }
+
+        /*
+        $('#calendar').fullCalendar({
+    views: {
+        basic: {
+            // options apply to basicWeek and basicDay views
+        },
+        agenda: {
+            // options apply to agendaWeek and agendaDay views
+        },
+        week: {
+            // options apply to basicWeek and agendaWeek views
+        },
+        day: {
+            // options apply to basicDay and agendaDay views
+        }
+    }
+});
+        */
 
         // ................................. TEST DATA .................................................................................
         var currDate = new Date();

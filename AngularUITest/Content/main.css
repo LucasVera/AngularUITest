@@ -108,3 +108,11 @@ input[type=checkbox]{
     from { -webkit-transform: rotate(0deg); }
     to { -webkit-transform: rotate(360deg); }
 }
+
+/* ui-grid */
+.grid{
+    /*
+    width:500px;
+    height:250px;
+    */
+}
