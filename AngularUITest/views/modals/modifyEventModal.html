@@ -1,0 +1,59 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="closeModal('modifyEvent')">&times;</button>
+    <h3 class="modal-title">Modificar evento</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal pad-sm" id="modifyEventForm" name="modifyEventForm" ng-submit="modifyEvent(modEvent)">
+        <div class="form-group">
+            <label class="form-label" for="txtTitle">Título</label>
+            <input type="text" class="form-control" id="txtTitle" placeholder="Ingrese el título del evento aquí" ng-model="modEvent.title" maxlength="100" required />
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-xs-12 form-label" for="startDate">Fecha de Inicio</label>
+            <div class="col-sm-5 col-xs-12">
+                <p class="input-group">
+                    <input class="form-control" type="text" id="startDate" ng-model="modEvent.startDate" is-open="modEvent.startDatePicker.opened" datepicker-options="startDateOptions"
+                           uib-datepicker-popup="dd-MMMM-yyyy" clear-text="Limpiar" close-text="Listo" current-text="Hoy" required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="modEvent.startDatePicker.opened = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <input class="form-control" type="time" id="startTime" ng-model="modEvent.startTime" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 form-label" for="endDate">Fecha Final</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="date" id="endDate" ng-model="modEvent.endDate" required />
+            </div>
+            <div class="col-sm-4">
+                <input class="form-control" type="time" id="endTime" ng-model="modEvent.endTime" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h5 class="col-sm-2 form-label" for="chkImportant">Importante</h5>
+            <div class="col-sm-2">
+                <input class="checkbox checkbox-inline" style="margin-top:4px;" type="checkbox" id="chkImportant" ng-model="modEvent.important" />
+            </div>
+        </div>
+
+        <div class="pad-sm"></div>
+
+        <button type="submit" class="btn btn-primary">Modificar evento</button>
+        <button type="button" class="btn btn-danger" ng-click="removeEvent(modEvent)" data-dismiss="modal">Eliminar evento</button>
+        <button type="button" class="btn btn-default" ng-click="closeModal('modifyEvent')">Cancelar</button>
+
+        <div class="marg-md"></div>
+        <div class="alert" ng-class="modifyEventModal.alertClass" ng-show="modifyEventModal.showAlert">
+            {{modifyEventModal.alertMsg}}
+            <button type="button" class="close" ng-click="modifyEventModal.showAlert = false;"><span aria-hidden="true">&times;</span></button>
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="closeModal('modifyEvent')">Cerrar</button>
+</div>

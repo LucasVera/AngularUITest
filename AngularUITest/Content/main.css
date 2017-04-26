@@ -51,14 +51,54 @@ input[type=checkbox]{
 }
 .row-content {
   margin: 0px auto;
-  padding: 50px 0px;
+  padding: 10px 0px;
   border-bottom: 1px ridge;
   min-height: 400px;
 }
 .row-footer {
   margin: 0px auto;
-  padding: 20px 0px;
+  padding: 5px 0px;
   background-color: #AfAfAf;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+    max-width:900px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+
+  .header{
+      margin-bottom: 4px;
+  }
+
+  .footer{
+      padding-top:30px;
+  }
+
+  .row-content{
+      padding:50px 0px;
+  }
+
+  .row-footer{
+      padding: 10px 0px;
+  }
 }
 
 .pad-lg{
@@ -115,4 +155,12 @@ input[type=checkbox]{
     width:500px;
     height:250px;
     */
+}
+
+/* NOTIFICATIONS --> BETTER USE ANGULAR-GROWL !! */
+.notification {
+    float: right;
+    position: absolute;
+    top: 25px;
+    right: 25px;
 }

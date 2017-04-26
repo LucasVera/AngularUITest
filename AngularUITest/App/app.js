@@ -3,12 +3,18 @@
 var ngModule = angular.module('AngularUI', [
     'ngResource',
     'ngRoute',
+    'ngAnimate',
     'ui.calendar',
-    'ui.grid'
+    'ui.grid',
+    'ui.grid.edit',
+    'ui.grid.rowEdit',
+    'ui.grid.cellNav',
+    'ui.bootstrap',
+    'angular-growl'
 ]);
 
 
-ngModule.config(function ($routeProvider) {
+ngModule.config(function ($routeProvider, growlProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/main.html',
@@ -28,5 +34,14 @@ ngModule.config(function ($routeProvider) {
         .otherwise({
             redirectTo: '/'
         });
+
+    growlProvider.globalTimeToLive({
+        success: 2500,
+        error: 8000,
+        warning: 2500,
+        info: 2500
+    });
+    growlProvider.globalDisableCountDown(true);
+
 });
 

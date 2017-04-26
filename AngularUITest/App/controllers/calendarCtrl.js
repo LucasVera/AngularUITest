@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 angular.module('AngularUI')
-.controller('CalendarCtrl', ['$scope', '$compile', 'uiCalendarConfig', 'helperService', function ($scope, $compile, uiCalendarConfig, helperService) {
+.controller('CalendarCtrl', ['$scope', '$compile', '$uibModal', '$timeout', 'uiCalendarConfig', 'helperService', function ($scope, $compile, $uibModal, $timeout, uiCalendarConfig, helperService) {
 
     $scope.initCtrl = function () {
         $scope.algo = 'Algo...';
@@ -34,26 +34,7 @@ angular.module('AngularUI')
             }
         }
 
-        /*
-        $('#calendar').fullCalendar({
-    views: {
-        basic: {
-            // options apply to basicWeek and basicDay views
-        },
-        agenda: {
-            // options apply to agendaWeek and agendaDay views
-        },
-        week: {
-            // options apply to basicWeek and agendaWeek views
-        },
-        day: {
-            // options apply to basicDay and agendaDay views
-        }
-    }
-});
-        */
-
-        // ................................. TEST DATA .................................................................................
+        // ................................. TEST DATA .........................................................................
         var currDate = new Date();
         var d = currDate.getDate();
         var m = currDate.getMonth();
@@ -75,7 +56,7 @@ angular.module('AngularUI')
             color: 'red',
             textColor: 'yellow'
         }];
-        // ...............................................................................................................................
+        // ......................................................................................................................
 
     }
 
@@ -97,6 +78,8 @@ angular.module('AngularUI')
             $scope.events.push(event);
         }
 
+        $scope.closeModal('addEvent');
+
         /*
         uiCalendarConfig.calendars['testCalendar'].fullCalendar('refetchEvents');
         uiCalendarConfig.calendars['testCalendar'].fullCalendar('rerenderEvents');
@@ -109,7 +92,7 @@ angular.module('AngularUI')
             'tooltip-append-to-body': true
         });
         $compile(element)($scope);
-    };
+    }
 
     $scope.refreshCalendar = function () {
         uiCalendarConfig.calendars['testCalendar'].fullCalendar('render');
@@ -121,6 +104,10 @@ angular.module('AngularUI')
     $scope.eventClick = function (event, jsEvent, view) {
         
         console.log(event);
+        console.log('\njsEvent: ');
+        console.log(jsEvent);
+        console.log('\nview:');
+        console.log(view);
 
         $scope.modEvent = {
             startDateTime: event.start._d,
@@ -131,24 +118,62 @@ angular.module('AngularUI')
             endTime: event.end._d,
             title: event.title,
             id: event.id,
-            important: event.important
+            important: event.important,
+            index: event._id - 1,
         };
         console.log(JSON.stringify($scope.modEvent));
-        $('#modifyEventModal').modal('show');
+        $scope.openModifyEventModal(angular.copy($scope.modEvent));
+        //$('#modifyEventModal').modal('show');
     }
 
     $scope.modifyEvent = function (modEvent) {
-        console.log('Modified event: ' + modEvent);
+        console.log('origEvent: ' + JSON.stringify($scope.modifyEventModal.origEvent));
+        console.log('Modified event: ' + JSON.stringify(modEvent));
+        console.log('index: ' + $scope.modifyEventModal.origEvent.index);
+        var event = $scope.modifyEventModal.origEvent;
+        if (event.important) {
+            var origEvent = $scope.importantEvents[event.index];
+        }
+        else {
+            var origEvent = $scope.events[event.index];
+        }
+        console.log('origEvent: ');
+        console.log(origEvent);
+
+        if (origEvent != undefined && origEvent != null) {
+            origEvent.start = modEvent.startDateTime;
+            origEvent.end = modEvent.endDateTime;
+            origEvent.title = modEvent.title;
+            if (origEvent.important != modEvent.important) {
+                if (origEvent.important) {
+                    $scope.importantEvents.splice(event.index, 1);
+                    $scope.events.push(origEvent);
+                }
+                else {
+                    $scope.events.splice(event.index, 1);
+                    $scope.importantEvents.push(origEvent);
+                }
+            }
+        }
+
+        $scope.closeModal('modifyEvent');
     }
 
     $scope.removeEvent = function (modEvent) {
-
-        
-
-        console.log('Removed event: ' + modEvent)
+        $scope.modifyEventModal.showAlert = true;
+        $scope.modifyEventModal.alertClass = 'alert-info';
+        $scope.modifyEventModal.alertMsg = 'Eliminando este evento...';
+        $timeout(function () {
+            $scope.modifyEventModal.showAlert = true;
+            $scope.modifyEventModal.alertClass = 'alert-success';
+            $scope.modifyEventModal.alertMsg = 'Evento eliminado con éxito';
+            console.log('Removed event: ' + modEvent);
+            $timeout(function () {
+                $scope.modifyEventModal.showAlert = false;
+                $scope.closeModal('modifyEvent');
+            },500);
+        }, 1500);
     }
-
-    $scope.initCtrl();
 
     $scope.btnTest = function () {
         var currDate = new Date();
@@ -165,6 +190,71 @@ angular.module('AngularUI')
         };
 
         $scope.events.push(event);
+
+        $scope.events[0].title = 'title updated';
     }
+
+    // ..................... MODALS SETUP AND METHODS .........................
+    $scope.openAddEventModal = function () {
+        $scope.addEventModal = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/modals/addEventModal.html',
+            controller: 'CalendarCtrl',
+            controllerAs: 'calendar',
+            bindToController: true,
+            scope: $scope
+        });
+    }
+
+    $scope.openModifyEventModal = function (event) {
+        $scope.startDateOptions = {
+            initDate: new Date(),
+            clearText: 'Limpiar',
+            'clear-text': 'Limpiar',
+            'close-text': 'Cerrar',
+            'current-text': 'Hoy'
+        };
+        console.log($scope.startDateOptions);
+        $scope.modEvent.startDatePicker = {
+            opened: false
+        };
+        $scope.modifyEventModal = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/modals/modifyEventModal.html',
+            controller: 'CalendarCtrl',
+            controllerAs: 'calendar',
+            bindToController: true,
+            scope: $scope,
+
+            // custom properties...
+            showAlert: false,
+            alertMsg: '',
+            alertClass: ''
+        });
+        $scope.modifyEventModal.origEvent = event;
+        console.log($scope.modifyEventModal);
+    }
+
+    $scope.closeModal = function (modalName) {
+        switch (modalName) {
+            case 'addEvent':
+                if ($scope.addEventModal != undefined && $scope.addEventModal != null) {
+                    $scope.addEventModal.close();
+                    $scope.addEventModal = null;
+                }
+                break;
+
+            case 'modifyEvent':
+                if ($scope.modifyEventModal != undefined && $scope.modifyEventModal != null) {
+                    $scope.modifyEventModal.close();
+                    $scope.modifyEventModal = null;
+                }
+                break;
+        }
+    }
+
+    // ........................................................................
+
+    $scope.initCtrl();
 }]);
 

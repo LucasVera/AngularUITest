@@ -1,17 +1,13 @@
 ﻿<div class="container">
     <div class="row row-content">
         <div class="col-xs-12">
-            <h2>El calendario va aquí</h2>
-
-            <div class="pad-lg"></div>
-
             <button class="btn btn-success marg-sm" ng-click="refreshCalendar()"><span class="glyphicon glyphicon-refresh"></span></button>
 
             <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="testCalendar"></div>
 
             <div class="pad-sm"></div>
 
-            <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addEventModal">Agregar Evento</button>
+            <button class="btn btn-lg btn-primary" ng-click="openAddEventModal()">Agregar Evento</button>
             <button class="btn btn-warning" ng-click="btnTest()">TEST</button>
 
         </div>
@@ -20,6 +16,7 @@
 
 
 <!-- ....................................... MODALS .............................................. -->
+<!-- ................... CURRENTLY NOT IN USE... USING UI-BOOTSTRAP! ............................. -->
 <div id="addEventModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 

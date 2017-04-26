@@ -36,5 +36,24 @@ angular.module('AngularUI')
             return null;
         }
 
+        this.getObjectInArrayById = function (array, id) {
+            for (var i = 0; i < array.length; i++) {
+                console.log('buscando en ' + JSON.stringify(array[i]));
+                if (array[i].id == id) {
+                    return array[i];
+                }
+            }
+            return null;
+        }
+
+        this.getIndexOfIdInArray = function (array, id) {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i].id == id) {
+                    return i;
+                }
+            }
+            return null;
+        }
+
     }])
 ;

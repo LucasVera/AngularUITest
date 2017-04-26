@@ -8,6 +8,7 @@
     <link href="Content/bootstrap.yeti.min.css" rel="stylesheet"/>
     <link href="Scripts/node_modules/fullcalendar/dist/fullcalendar.css" rel="stylesheet"/>
     <link href="Content/ui-grid.min.css" rel="stylesheet"/>
+    <link href="Content/angular-growl.min.css" rel="stylesheet" />
     <link href="Content/main.css" rel="stylesheet" />
 
 </head>
@@ -62,7 +63,8 @@
             </div>
         </div>
     </nav>
-
+    <div growl>
+    </div>
     <div ng-view="/"></div>
 
     <footer class="footer">
@@ -76,20 +78,10 @@
                         <li><a href="#/contact">??</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-12 col-sm-7 col-sm-offset-2">
-                    <div class="nav navbar-nav" style="padding: 40px 10px;">
-                        <a class="btn btn-social-icon btn-google-plus" href="http://google.com/+"><i class="fa fa-google-plus fa-2x"></i></a>
-                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com"><i class="fa fa-facebook fa-2x"></i></a>
-                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com"><i class="fa fa-linkedin fa-2x"></i></a>
-                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-2x"></i></a>
-                        <a class="btn btn-social-icon btn-youtube" href="http://youtube.com/"><i class="fa fa-youtube fa-2x"></i></a>
-                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope fa-2x"></i></a>
-                    </div>
-                </div>
             </div>
             <div class="col-xs-12">
                 <p style="padding:10px;"></p>
-                <p align=center>© Copyright 2016</p>
+                <p align=center>© Copyright 2017</p>
             </div>
         </div>
     </footer>
@@ -101,12 +93,17 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/angular-resource.js"></script>
     <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-touch.min.js"></script>
+    <script src="Scripts/angular-growl.min.js"></script>
+    <script src="Scripts/angular-locale_es-co.js"></script>
     <!-- ......................... ANGULAR-UI ................................... -->
     <script src="Scripts/node_modules/angular-ui-calendar/src/calendar.js"></script>
     <script src="Scripts/node_modules/fullcalendar/dist/fullcalendar.js"></script>
     <script src="Scripts/node_modules/fullcalendar/dist/gcal.js"></script>
     <script src="Scripts/node_modules/fullcalendar/dist/locale/es.js"></script>
     <script src="Scripts/ui-grid.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <!--.........................................................................-->
 
     <!-- ........................ CONTROLLERS/SERVICES ........................  -->
