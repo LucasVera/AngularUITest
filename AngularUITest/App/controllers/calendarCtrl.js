@@ -9,12 +9,12 @@ angular.module('AngularUI')
 
             calendar: {
                 header: {
-                    left: 'agendaDay,agendaWeek,month,list',
+                    left: 'basicDay,agendaWeek,month,listMonth',
                     center: 'title',
                     right: 'today prev,next',
                 },
 
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'],
                 dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
@@ -22,7 +22,29 @@ angular.module('AngularUI')
                 eventClick: $scope.eventClick,
                 eventRender: $scope.eventRender,
 
+                businessHours: {
+                    dow: [1, 2, 3, 4, 5],
+                    start: '07:00',
+                    end: '17:00'
+                },
+
+                eventLimit: true,
+                views: {
+                    basic: {
+                        timeFormat: 'hh:mm a'
+                    },
+                    agenda: {
+                        timeFormat: 'hh:mm a'
+                    },
+                    month: {
+                        timeFormat: 'h(:mm)a'
+                    }
+                },
+
+                //theme:true, <--- use custom jquery css
+
                 timeFormat: 'hh:mm a'
+
                 /*
                 views: {
                     basic: { timeFormat: 'hh:mm a' },
@@ -42,9 +64,9 @@ angular.module('AngularUI')
         var h = currDate.getHours();
         $scope.events = [
             { id: 1, title: 'All Day Event', start: new Date(y, m, 1), important: false },
-            { id: 2, title: 'Long Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2), important:false },
-            { id: 999, title: 'Repeating Event', start: new Date(y, m, d - 3, 16, 0), allDay: false, important:false },
-            { id: 33, title: 'Birthday Party', start: new Date(y, m, d + 1, 19, 0), end: new Date(y, m, d + 1, 22, 30), allDay: false, important:false }
+            { id: 2, title: 'Long Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2), important: false },
+            { id: 999, title: 'Repeating Event', start: new Date(y, m, d - 3, 16, 0), allDay: false, important: false },
+            { id: 33, title: 'Birthday Party', start: new Date(y, m, d + 1, 19, 0), end: new Date(y, m, d + 1, 22, 30), allDay: false, important: false }
         ];
         $scope.importantEvents = [
             { id: 11, title: 'Evento importante', start: new Date(y, m, d, h - 5), end: new Date(y, m, d, h + 3), important: true }
@@ -53,8 +75,9 @@ angular.module('AngularUI')
             events: $scope.events
         }, {
             events: $scope.importantEvents,
+            //textColor: 'yellow',
             color: 'red',
-            textColor: 'yellow'
+            borderColor: 'green'
         }];
         // ......................................................................................................................
 
@@ -102,7 +125,7 @@ angular.module('AngularUI')
     }
 
     $scope.eventClick = function (event, jsEvent, view) {
-        
+
         console.log(event);
         console.log('\njsEvent: ');
         console.log(jsEvent);
@@ -171,7 +194,7 @@ angular.module('AngularUI')
             $timeout(function () {
                 $scope.modifyEventModal.showAlert = false;
                 $scope.closeModal('modifyEvent');
-            },500);
+            }, 500);
         }, 1500);
     }
 

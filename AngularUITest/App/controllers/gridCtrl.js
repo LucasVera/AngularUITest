@@ -8,14 +8,14 @@ angular.module('AngularUI')
         {
             names: 'Juan',
             lastNames: 'Torres',
-            company: 'Navitrans',
+            company: 1,
             isAdmin: false,
             age: 34
         },
         {
             names: 'Lucas',
             lastNames: 'Vera Toro',
-            company: 'Blisoft',
+            company: 2,
             isAdmin: true,
             age: 27
         },
@@ -29,12 +29,19 @@ angular.module('AngularUI')
 
         $scope.gridOpts = {
             enableFiltering: true,
+            enableColumnResizing: true,
+
             columnDefs: [
-                { name: 'Nombres', field: 'names', enableHiding: false },
-                { name: 'Apellidos', field: 'lastNames' },
-                { name: 'Compañía', field: 'company' },
-                { name: 'Admin', field: 'isAdmin', enableCellEdit:false, type:'boolean', enableFiltering:false },
-                { name: 'Edad', field: 'age', type: 'number', enableFiltering:false },
+                { name: 'Nombres', field: 'names', enableHiding: false, minWidth:150 },
+                { name: 'Apellidos', field: 'lastNames', minWidth:150 },
+                {
+                    name: 'Compañía', field: 'company', minWidth: 120, editableCellTemplate: 'ui-grid/dropdownEditor', cellFilter: 'mapCompany', editDropdownValueLabel: 'company', editDropdownOptionsArray: [
+                        { id: 1, company: 'Navitrans' },
+                        { id: 2, company: 'Blisoft' }
+                    ]
+                },
+                { name: 'Admin', field: 'isAdmin', enableCellEdit:false, type:'boolean', enableFiltering:false, minWidth:80 },
+                { name: 'Edad', field: 'age', type: 'number', enableFiltering:false, minWidth:80 },
             ],
             data: $scope.users,
             enableGridMenu: true,
@@ -79,7 +86,7 @@ angular.module('AngularUI')
 
     $scope.doAction1 = function () {
         //$window.alert('Acción 1 realizada!!');
-        growl.info('Scción 1 realizada')
+        growl.info('Scción 1 realizada');
     }
 
     $scope.addRecord = function (newRecord) {
@@ -90,4 +97,19 @@ angular.module('AngularUI')
     }
 
     $scope.initController();
-}]);
+}])
+.filter('mapCompany', function () {
+    var companyHash = {
+        1: 'Navitrans',
+        2: 'Blisoft'
+    };
+
+    return function (input) {
+        if (!input) {
+            return '';
+        } else {
+            return companyHash[input];
+        }
+    };
+})
+;
