@@ -8,6 +8,11 @@ angular.module('AngularUI')
         $scope.uiConfig = {
 
             calendar: {
+
+                //height: 'auto',
+                aspectRatio: 1.5,
+                navLinks: true,
+
                 header: {
                     left: 'basicDay,agendaWeek,month,listMonth',
                     center: 'title',
@@ -31,7 +36,8 @@ angular.module('AngularUI')
                 eventLimit: true,
                 views: {
                     basic: {
-                        timeFormat: 'hh:mm a'
+                        timeFormat: 'hh:mm a',
+                        eventLimit: false
                     },
                     agenda: {
                         timeFormat: 'hh:mm a'
@@ -40,6 +46,8 @@ angular.module('AngularUI')
                         timeFormat: 'h(:mm)a'
                     }
                 },
+
+                slotLabelFormat: 'h(mm)a',
 
                 //theme:true, <--- use custom jquery css
 
@@ -72,12 +80,17 @@ angular.module('AngularUI')
             { id: 11, title: 'Evento importante', start: new Date(y, m, d, h - 5), end: new Date(y, m, d, h + 3), important: true }
         ];
         $scope.eventSources = [{
-            events: $scope.events
+            events: $scope.events,
+            //textColor: '#87d1ff',
+            color: '#4f8da5'
         }, {
             events: $scope.importantEvents,
-            //textColor: 'yellow',
-            color: 'red',
-            borderColor: 'green'
+            //textColor: '#fff987',
+            color: '#57a54f'
+            //borderColor: '#8dff87'
+            // text-color:  green: #8dff87 - red: #ff8787 - yellow: #ffef60 - blue: #87d1ff     LIGHT-COLORS
+            // color:       green: #356d35 - red: #6d3535 - yellow: #968806 - blue: #355d6d     DARK-COLORS
+            // border-color:green: #57a54f - red: #a54f4f - yellow: #e0cc18   blue: #4f8da5     NEUTRAL-COLORS
         }];
         // ......................................................................................................................
 
