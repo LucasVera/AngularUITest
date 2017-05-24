@@ -1,0 +1,13 @@
+﻿<div class="ui-grid-cell-contents">
+    <div class="btn-group" uib-dropdown dropdown-append-to-body is-open="status.isOpen">
+        <button type="button" id="optionsDropdown" class="btn btn-xs btn-primary pad-xs dropdown-toggle" uib-dropdown-toggle>
+            Opciones <span class="glyphicon glyphicon-th-list"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+            <li role="menuitem"><a href="" ng-click="grid.appScope.rowOption(1, row.entity)">Cambiar edad a 99</a></li>
+            <li role="menuitem"><a href="" ng-click="grid.appScope.rowOption(2, row.entity)">Mostrar Nombre completo</a></li>
+            <li class="divider"></li>
+            <li role="menuitem"><a href="" ng-click="grid.appScope.rowOption(3, row.entity)">Ir a calendario</a></li>
+        </ul>
+    </div>
+</div>
